@@ -12,14 +12,12 @@
     "sourceMap": false,
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "skipLibCheck": true,
     "lib": ["esnext", "dom"],
-    "types": [
-      "node",
-      "vuetify"
-    ],
+    "types": ["node", "vuetify"],
     "paths": {
       "@/*": ["src/*"]
-    },
+    }
   },
   "include": [
     "src/**/*.ts",
