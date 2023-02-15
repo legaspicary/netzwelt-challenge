@@ -3,7 +3,7 @@ const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
 const app = express();
-const port = 3001;
+const port = process.env.API_PORT ?? 3000;
 
 dotenv.config({ path: "../.env" });
 
