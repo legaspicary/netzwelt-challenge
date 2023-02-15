@@ -27,7 +27,7 @@ export const useAuthStore = defineStore("auth", {
       }
 
       this.user = JSON.parse(userJsonString);
-      if (!!this.user?.displayName && !!this.user?.username) {
+      if (!this.user?.displayName || !this.user?.username) {
         return false;
       }
 
