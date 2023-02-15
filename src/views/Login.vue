@@ -35,6 +35,7 @@
         variant="flat"
         size="large"
         :loading="isLoading"
+        :disabled="!form.password || !form.username"
         >SUBMIT</v-btn
       >
     </v-form>
