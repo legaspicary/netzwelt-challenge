@@ -1,11 +1,11 @@
 const dotenv = require("dotenv");
+dotenv.config();
+
 const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
 const app = express();
-const port = process.env.API_PORT ?? 3000;
-
-dotenv.config({ path: "../.env" });
+const port = process.env.API_PORT || 3000;
 
 app.use(express.json());
 app.use(
@@ -47,3 +47,5 @@ app.post("/login", async (req, res) => {
 app.listen(port, () => {
   console.log(`Netzwelt exercise middleman api listening on port ${port}`);
 });
+
+module.exports = app;
