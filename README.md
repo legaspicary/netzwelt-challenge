@@ -4,6 +4,8 @@ This project is a submission for the Netzwelt exercise as part of the applicatio
 
 ## Project setup
 
+The app was developed using Node.JS v16.13.0
+
 ```
 # yarn
 yarn
