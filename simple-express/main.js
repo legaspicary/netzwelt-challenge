@@ -23,7 +23,7 @@ app.get("/territories", async (req, res) => {
   let statusCode = 200;
   try {
     const response = await axiosAPI.get("/Territories/All");
-    data = response.data;
+    data = response.data.data;
   } catch (e) {
     const { status } = e.response;
     statusCode = status;
