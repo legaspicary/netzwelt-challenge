@@ -29,7 +29,12 @@
       <p class="text-error mb-5" v-for="(error, i) in errorsList" :key="i">
         {{ error }}
       </p>
-      <v-btn type="submit" color="primary" variant="flat" size="large"
+      <v-btn
+        type="submit"
+        color="primary"
+        variant="flat"
+        size="large"
+        :loading="isLoading"
         >SUBMIT</v-btn
       >
     </v-form>
@@ -47,10 +52,14 @@ const form = reactive({
 
 const authStore = useAuthStore();
 const errorsList: Ref<string[]> = ref([]);
+
+const isLoading = ref(false);
 const login = async () => {
+  isLoading.value = true;
   errorsList.value = await authStore.login(form.username, form.password);
   if (!errorsList.value.length) {
     window.location.reload();
   }
+  isLoading.value = false;
 };
 </script>
