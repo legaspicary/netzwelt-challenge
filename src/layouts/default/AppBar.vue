@@ -2,7 +2,7 @@
   <v-app-bar color="primary">
     <v-app-bar-title>{{ currentRoute.name }}</v-app-bar-title>
 
-    <span v-if="isInHome" class="mr-3">
+    <span v-if="isInHome && authStore.getUser?.displayName" class="mr-3">
       Welcome, {{ authStore.getUser?.displayName }}
     </span>
     <template v-slot:append>
