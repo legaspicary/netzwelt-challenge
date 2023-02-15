@@ -3,7 +3,7 @@
     <h1 class="mt-5">Login to your Account</h1>
     <p class="py-2">To use the app, please login first.</p>
 
-    <v-form @submit="login">
+    <v-form @submit.prevent @submit="login">
       <v-container class="mt-5">
         <v-row class="justify-center">
           <v-col class="pt-5" cols="12" sm="5">
@@ -26,6 +26,9 @@
           </v-col>
         </v-row>
       </v-container>
+      <p class="text-error mb-5" v-for="(error, i) in errorsList" :key="i">
+        {{ error }}
+      </p>
       <v-btn type="submit" color="primary" variant="flat" size="large"
         >SUBMIT</v-btn
       >
@@ -34,7 +37,7 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive } from "vue";
+import { reactive, Ref, ref } from "vue";
 import { useAuthStore } from "../store/auth";
 
 const form = reactive({
@@ -43,7 +46,11 @@ const form = reactive({
 });
 
 const authStore = useAuthStore();
-const login = () => {
-  authStore.login(form.username, form.password);
+const errorsList: Ref<string[]> = ref([]);
+const login = async () => {
+  errorsList.value = await authStore.login(form.username, form.password);
+  if (!errorsList.value.length) {
+    window.location.reload();
+  }
 };
 </script>

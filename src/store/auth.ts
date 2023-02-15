@@ -35,14 +35,26 @@ export const useAuthStore = defineStore("auth", {
     },
 
     async login(username: string, password: string) {
-      // do login
-      this.user = {
-        username: "foo",
-        displayName: "Foo Bar Foo",
-        roles: ["basic-user"],
-      };
+      const errors: string[] = [];
 
-      localStorage.setItem("user", JSON.stringify(this.user));
+      try {
+        const response = await this.axiosAPI.post("/login", {
+          username,
+          password,
+        });
+
+        this.user = response.data;
+
+        localStorage.setItem("user", JSON.stringify(this.user));
+      } catch (e: any) {
+        const { status } = e.response;
+        if (status === 404) {
+          errors.push("Username/password is invalid");
+        } else {
+          errors.push("Something went wrong with the server");
+        }
+      }
+      return errors;
     },
 
     async logout() {
