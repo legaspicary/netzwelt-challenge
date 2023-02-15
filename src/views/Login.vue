@@ -59,6 +59,7 @@ const login = async () => {
   errorsList.value = await authStore.login(form.username, form.password);
   if (!errorsList.value.length) {
     window.location.reload();
+    return;
   }
   isLoading.value = false;
 };
